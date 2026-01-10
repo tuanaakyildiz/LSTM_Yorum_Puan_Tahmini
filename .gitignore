@@ -1,0 +1,31 @@
+# Python sanal ortamı
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+backend/venv/
+__pycache__/
+*.pyc
+
+# Veri ve Modeller (İsteğe bağlı - eğer çok büyüklerse açın)
+data/
+*.h5
+*.keras
+
+# IDE Ayarları
+.vscode/
+.idea/
+
+# Sistem dosyaları
+Thumbs.db
+desktop.ini
+
+# Log dosyaları
+*.log
+
+
+# React
+frontend/node_modules/
+frontend/build/
+.env
