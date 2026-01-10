@@ -17,9 +17,17 @@ from tensorflow.keras.metrics import MeanAbsoluteError
 
 
 #load yelp dataset from huggingface https://huggingface.co/datasets/Yelp/yelp_review_full
+#huggingfaceden yelp veri setini yükle
 
+splits = {"train":"yelp_review_full/train-00000-of-00001.parquet"}
+train_path= "hf://datasets/Yelp/yelp_review_full/" + splits["train"]
 
+#parquet formatindan veriyi pandas ile oku
+df= pd.read_parquet(train_path)
+print(df.head())
 
+#etiketleri 0-4 aralığından 1-5 aralığına dönüştürelim
+df["label"] = df["label"] + 1
 
 #data preprocessing
 
