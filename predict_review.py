@@ -23,4 +23,12 @@ texts = [
 #tokenizer
 
 #text sayılara çevir ve padding işlemi
+sequences = tokenizer.text_to_sequences(texts)
+padded = pad_sequences(sequences, maxlen=100, padding= "post")
+
+#LSTM prediction
+
+predictions = model.predict(padded)
+
+#
 
