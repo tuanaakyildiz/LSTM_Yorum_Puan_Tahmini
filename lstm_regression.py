@@ -57,26 +57,55 @@ scaler= MinMaxScaler()
 labels_scaled = scaler.fit_transform(labels.reshape(-1,1))
 
 #eğitim ve test verisini ayır
-X_train, X_test, y_train, y_test = train_test_split(padded_sequences,labels_scaled,text_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(padded_sequences,labels_scaled,test_size=0.2, random_state=42)
 print(f"X_train shape: {X_train.shape}")
 print(f"X_train: {X_train[:2]}")
 
 print(f"y_train shape: {y_train.shape}")
 print(f"y_train: {y_train[:2]}")
 
-
-
-
 #LSTM based regression model
 
+model=Sequential()
 
+#embedding katmanı: kelime indexlerini vektor uzayına donuşturur
+#input_dim: 10000 kelime sayisi
+#output_dim: 128 her bir kelime 128 boyutlu vektorle temsil edilecek
+#input_lenght: sabit dizi uzunluğu yani her bir metnimizin uzunluğu
+model.add(Embedding(input_dim = 10000, output_dim = 128, input_length=100))
 
+#LSTM katmanı: sıralı veride bağlamı öğrenecek olan katman
+model.add(LSTM(128)) # 128:lstmde bulunan hucre sayısı yani daha fazla öğrenme sayısı kapisetesi
 
+# tam bağlı (dense) layer
+model.add(Dense(64, activation = "relu"))
+
+#output layer
+model.add(Dense(1, activation="linear"))
 
 #model compile and training 
 
+model.compile(
+    optimizer = "adam", #adaptif öğrenme algoritması
+    loss = MeanSquaredError(), # regresyon için uygun bir loss fonksiyonu
+    metrics= [MeanAbsoluteError()] # modelin hata ortalaması
+)
 
+history = model.fit(
+    X_train, y_train,
+    epochs = 3,  #toplam eğitim döngüsü
+    batch_size = 64, # her adımda işlenecek örnek sayısı
+    validation_split = 0.2 #eğitim verisinin %20si validasyon için ayrılır
+)
 
+# visulize training  loss graphs and save model
 
+plt.plot(history.history["loss"], label = "Training Loss")
+plt.plot(history.history["val_loss"], label = "Validation Loss")
+plt.title("Eğitim Süreci Loss: MSE")
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.show()
 
-# visulize training  loss graphs and save model 
+#modeli kaydet
+model.save("regression_lstm_yelp.h5")
