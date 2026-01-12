@@ -28,7 +28,7 @@ def predict():
     
     # Prediction
     prediction = model.predict(padded)
-    score = float(prediction[0][0] * 5) # 0-5 skalasına çek
+    score = float(prediction[0][0] * 5) # scale it to 0-5
     
     return jsonify({'score': round(score, 2)})
 

@@ -1,4 +1,4 @@
-#yazılan yorumlar için lstm tahmin ortaya çıkarsın
+#Let the LSTM generate predictions for the written comments.
 
 #import liblaries
 import numpy as np
@@ -6,11 +6,11 @@ import pickle
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-#modeli yükle
+#load model
 model = load_model("regression_lstm_yelp.h5", compile = False)
 
 #PREPROCESSING
-#tokenizer yükle
+#load tokenizer
 with open ("tokenizer.pkl","rb") as f:
     tokenizer = pickle.load(f)
 
@@ -22,8 +22,8 @@ texts = [
     "best experience ever", "worst experience ever"
 ]
 
-#tokenizer
-#text sayılara çevir ve padding işlemi
+# tokenizer
+# Convert text to numbers and apply padding.
 sequences = tokenizer.texts_to_sequences(texts)
 padded = pad_sequences(sequences, maxlen=100, padding= "post")
 
@@ -35,7 +35,7 @@ predictions = model.predict(padded)
 
 prediction_scaled = predictions * 5
 
-#sonuçları yazdır
+#print results
 for i, comment in enumerate(texts):
     print(f"Yorum: \n{comment}")
     print(f"Tahmini Skor Değeri:\t{prediction_scaled[i][0]:.2f}")
