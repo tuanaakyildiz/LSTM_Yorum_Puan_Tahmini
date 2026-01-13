@@ -83,7 +83,7 @@ model.add(Dense(64, activation = "relu"))
 #output layer
 model.add(Dense(1, activation="linear"))
 
-#model compile and training 
+#model compile and training
 
 model.compile(
     optimizer = "adam", # adaptive learning algorithm
