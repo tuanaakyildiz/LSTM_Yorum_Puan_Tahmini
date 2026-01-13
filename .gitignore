@@ -28,4 +28,4 @@ desktop.ini
 # React
 sentiment-frontend/node_modules/
 sentiment-frontend/build/
-.env
+.env 
