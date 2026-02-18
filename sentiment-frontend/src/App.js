@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useTheme } from './hooks/useTheme';
+import InputArea from './components/InputArea';
+import ResultDisplay from './components/ResultDisplay';
 import './App.css';
 
 function App() {
   const [text, setText] = useState('');
   const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handlePredict = async () => {
     setLoading(true);
@@ -13,33 +17,36 @@ function App() {
       const response = await axios.post('http://localhost:5000/predict', { text });
       setScore(response.data.score);
     } catch (error) {
-      console.error("Error Occurred!", error);
+      alert("Sunucuya bağlanılamadı!");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>LSTM Yorum Puan Tahmini</h1>
-        <textarea 
-          placeholder="Enter your review..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button onClick={handlePredict} disabled={loading}>
-          {loading ? 'Analyzing...' : 'Grade'}
+    <div className={`app-wrapper ${theme}`}>
+      <nav className="navbar">
+        <h2>LSTM Sentiment</h2>
+        <button onClick={toggleTheme} className="theme-toggle">
+          {theme === 'light' ? '🌙 Koyu Mod' : '☀️ Açık Mod'}
         </button>
-        
-        {score !== null && (
-          <div className="result">
-            <h3>Tahmini Skor: {score} / 5.0</h3>
-            <div className="stars">
-              {"⭐".repeat(Math.round(score))}
-            </div>
-          </div>
-        )}
-      </header>
+      </nav>
+      
+      <main className="content">
+        <header>
+          <h1>Yorum Puan Analizi</h1>
+          <p>Yapay zeka yorumunuzu 1-5 arası puanlar.</p>
+        </header>
+
+        <InputArea 
+          text={text} 
+          setText={setText} 
+          handlePredict={handlePredict} 
+          loading={loading} 
+        />
+
+        <ResultDisplay score={score} />
+      </main>
     </div>
   );
 }
