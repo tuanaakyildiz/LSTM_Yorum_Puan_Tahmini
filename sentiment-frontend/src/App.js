@@ -26,16 +26,16 @@ function App() {
   return (
     <div className={`app-wrapper ${theme}`}>
       <nav className="navbar">
-        <h2>LSTM Sentiment</h2>
+        <h2>LSTM Sentiment Analysis</h2>
         <button onClick={toggleTheme} className="theme-toggle">
-          {theme === 'light' ? '🌙 Koyu Mod' : '☀️ Açık Mod'}
+          {theme === 'light' ? '🌙 Dark Mod' : '☀️ Light Mod'}
         </button>
       </nav>
       
       <main className="content">
         <header>
-          <h1>Yorum Puan Analizi</h1>
-          <p>Yapay zeka yorumunuzu 1-5 arası puanlar.</p>
+          <h1>Comment Score Analysis</h1>
+          <p>AI scores your comment from 1 to 5</p>
         </header>
 
         <InputArea 
