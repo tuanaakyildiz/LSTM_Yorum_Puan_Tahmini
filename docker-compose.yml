@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # The Python Backend
+  backend:
+    build: 
+      context: . # Looks for the Dockerfile in the current (root) folder
+    ports:
+      - "5000:5000"
+
+  # The React Frontend
+  frontend:
+    build: 
+      context: ./sentiment-frontend # Looks for the Dockerfile in the frontend folder
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Helps React update instantly when you change code
+    depends_on:
+      - backend # Wait for Python to start before starting React

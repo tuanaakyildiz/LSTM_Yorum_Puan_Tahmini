@@ -1,0 +1,5 @@
+# Node modüllerini asla Docker'a kopyalama!
+node_modules/
+npm-debug.log
+build/
+.git/

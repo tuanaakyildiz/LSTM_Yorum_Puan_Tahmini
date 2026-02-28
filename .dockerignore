@@ -1,0 +1,11 @@
+# Ignore the frontend folder for the Python backend build
+sentiment-frontend/
+
+# Ignore virtual environments and cache
+venv/
+__pycache__/
+*.pyc
+
+# Ignore Git files
+.git/
+.gitignore
