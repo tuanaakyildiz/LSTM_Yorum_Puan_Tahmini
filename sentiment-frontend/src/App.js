@@ -14,7 +14,7 @@ function App() {
   const handlePredict = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('https://lstm-yorum-puan-tahmini-api.onrender.com', { text });
+      const response = await axios.post('https://tuievolution-sentiment-api.hf.space', { text });
       setScore(response.data.score);
     } catch (error) {
       alert("Sunucuya bağlanılamadı!");
