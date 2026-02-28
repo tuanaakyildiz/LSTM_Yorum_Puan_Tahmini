@@ -11,13 +11,18 @@ function App() {
   const [loading, setLoading] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
-  const handlePredict = async () => {
+const handlePredict = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('https://tuievolution-sentiment-api.hf.space', { text });
-      setScore(response.data.score);
+      //{ text } yerine { review: text } yazarak backend'in beklediği formata çevrildi
+      const response = await axios.post('https://tuievolution-sentiment-api.hf.space/predict', { 
+        review: text 
+      });
+      
+      setScore(response.data.score); // Not: Backend "raw_score" veya "confidence" dönüyorsa burayı ona göre güncellemelisin
     } catch (error) {
-      alert("Sunucuya bağlanılamadı!");
+      console.error("API Hatası:", error); // Hatayı konsolda detaylı görmek için
+      alert("Sunucuya bağlanılamadı! Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);
     }
