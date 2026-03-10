@@ -28,6 +28,32 @@ const handlePredict = async () => {
     }
   };
 
+  //testing in local
+/*   const handlePredict = async () => {
+    setLoading(true);
+    try {
+      // 1. URL geçici olarak lokale (kendi bilgisayarına) yönlendirildi
+      const response = await axios.post('http://localhost:5000/predict', { 
+        review: text 
+      });
+      
+      // 2. DEDEKTİF KODU: Backend'den tam olarak ne geliyor? Tarayıcı konsoluna yazdırıyoruz.
+      console.log("API'den Gelen Yanıt:", response.data); 
+
+      // 3. SKOR DEĞİŞKENİ: Eski Flask kodunda veriyi "raw_score" olarak dönüyorduk. 
+      // Eğer backend "score" yerine "raw_score" veya başka bir isim dönüyorsa hata alırsın.
+      // Garantilemek için ikisini de kontrol ediyoruz:
+      setScore(response.data.score || response.data.raw_score); 
+      
+    } catch (error) {
+      console.error("API Hatası:", error);
+      alert("Sunucuya bağlanılamadı! Lütfen Flask'ın çalıştığından emin olun.");
+    } finally {
+      setLoading(false);
+    }
+  }; */
+
+
   return (
     <div className={`app-wrapper ${theme}`}>
       <nav className="navbar">
