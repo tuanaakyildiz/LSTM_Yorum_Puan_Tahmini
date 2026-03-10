@@ -18,19 +18,56 @@ with open("tokenizer.pkl", "rb") as f:
 #Rest API Endpoint
 
 @app.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json()
-    text = data.get('text', '')
-    
-    # Preprocessing
-    sequence = tokenizer.texts_to_sequences([text])
-    padded = pad_sequences(sequence, maxlen=100, padding="post")
-    
-    # Prediction
-    prediction = model.predict(padded)
-    score = float(prediction[0][0] * 5) # scale it to 0-5
-    
-    return jsonify({'score': round(score, 2)})
+def predict_sentiment():
+    try:
+        # 1. React'ten gelen veriyi al
+        data = request.get_json()
+        
+        # DEDEKTİF KODU 1: Gelen veriyi terminale yazdır
+        print(f"\n--- YENİ İSTEK GELDİ ---")
+        print(f"1. React'ten Gelen Ham Veri: {data}")
+
+        # Verinin içinden 'review' anahtarını çek
+        user_review = data.get('review', '')
+
+        if not user_review or str(user_review).strip() == "":
+            return jsonify({'error': 'Lütfen geçerli bir yorum girin.'}), 400
+
+        # 2. Metni sayılara çevir (Tokenizer)
+        encoded = tokenizer.texts_to_sequences([user_review])
+        
+        # DEDEKTİF KODU 2: Tokenizer kelimeleri tanımış mı?
+        print(f"2. Tokenizer Çıktısı (Sayısal Dizi): {encoded}")
+        
+        # Eğer dizi boşsa [[]] (Yani tokenizer kelimelerin hiçbirini sözlükte bulamadıysa)
+        if len(encoded[0]) == 0:
+            print("⚠️ UYARI: Tokenizer bu kelimelerin hiçbirini tanımadı!")
+
+        # Uzunluğu 200'e sabitle
+        processed_input = pad_sequences(encoded, maxlen=200)
+        
+        # 3. Model Tahmini
+        prediction = model.predict(processed_input)[0][0]
+        print(f"3. Modelin Ham Çıktısı (0.0 - 1.0 arası): {prediction}")
+
+        # 4. SKORU 1 İLE 5 ARASINA ÖLÇEKLEME (React arayüzüne uyum için)
+        # 0.0 -> 1 puan, 1.0 -> 5 puan olacak şekilde matematiğe döküyoruz
+        score_1_to_5 = 1 + (prediction * 4)
+        print(f"4. React'e Gönderilen Puan: {score_1_to_5:.1f}\n")
+
+        # React'in beklediği formatta (response.data.score) gönder
+        # JSON hatasını önlemek için değerleri açıkça float() ile sarmalıyoruz
+        # Aksi takdirde numpy.float32 tipi JSON'a dönüştürülemez.
+        return jsonify({
+            'score': float(round(score_1_to_5, 1)),
+            'raw_score': float(prediction)
+        })
+
+    except Exception as e:
+        # Hata mesajını daha detaylı görmek için
+        import traceback
+        print(traceback.format_exc()) 
+        return jsonify({'error': str(e)}), 500
 
 #to strat Flask API
 
