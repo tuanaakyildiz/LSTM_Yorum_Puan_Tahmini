@@ -58,9 +58,21 @@ const handlePredict = async () => {
     <div className={`app-wrapper ${theme}`}>
       <nav className="navbar">
         <h2>LSTM Sentiment Analysis</h2>
-        <button onClick={toggleTheme} className="theme-toggle">
-          {theme === 'light' ? '🌙 Dark Mod' : '☀️ Light Mod'}
-        </button>
+        
+       <div className="nav-actions">
+          <a 
+            href="https://tuievolution.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="nav-link"
+          >
+            TUIEVOLUTION
+          </a>
+          
+          <button onClick={toggleTheme} className="theme-toggle">
+            {theme === 'light' ? '🌙 Dark Mod' : '☀️ Light Mod'}
+          </button>
+        </div>
       </nav>
       
       <main className="content">
