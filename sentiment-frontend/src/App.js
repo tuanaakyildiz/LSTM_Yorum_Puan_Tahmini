@@ -4,6 +4,7 @@ import { useTheme } from './hooks/useTheme';
 import InputArea from './components/InputArea';
 import ResultDisplay from './components/ResultDisplay';
 import './App.css';
+import InfoBoxes from './components/InfoBoxes';
 
 function App() {
   const [text, setText] = useState('');
@@ -84,6 +85,8 @@ const handlePredict = async () => {
         />
 
         <ResultDisplay score={score} />
+
+        <InfoBoxes/>
       </main>
     </div>
   );
