@@ -323,61 +323,66 @@
     max-width: 600px;
   }
 }
-/* Container for the bottom section */
+/* Alt bölüm ana kapsayıcı */
 .footer-info-container {
   margin-top: 60px;
   padding: 40px 20px;
   width: 100%;
   border-top: 1px solid var(--border-color);
-  background: var(--bg-color); /* Matches the app background */
 }
 
+/* 2x2 Grid yapısı */
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
+  grid-template-columns: 1fr 1fr; /* Yan yana iki eşit sütun */
+  gap: 25px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .footer-box {
   background: var(--card-bg);
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
   border: 1px solid var(--border-color);
   text-align: left;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-box h3 {
   color: var(--accent-color);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
 }
 
-/* Score Scale Colors */
+/* Puan skalası için özel stiller */
 .scale-item {
   padding: 6px 12px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-.scale-item.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-.scale-item.orange { background: rgba(249, 115, 22, 0.1); color: #f97316; }
-.scale-item.gray { background: rgba(156, 163, 175, 0.1); color: #9ca3af; }
-.scale-item.light-green { background: rgba(132, 204, 22, 0.1); color: #84cc16; }
-.scale-item.bright-green { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
-
-/* Example Code styling */
+/* Örnek kod blokları */
 .example-sentences code {
   display: block;
   background: var(--bg-color);
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   border-left: 4px solid var(--accent-color);
   color: var(--text-primary);
+}
+
+/* Mobil uyumluluk: Ekran küçülünce tek sütuna dön */
+@media (max-width: 850px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
 }
