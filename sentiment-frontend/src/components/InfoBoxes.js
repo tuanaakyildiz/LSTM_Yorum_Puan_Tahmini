@@ -2,33 +2,38 @@ import React from 'react';
 
 const InfoBoxes = () => {
   return (
-    <div className="info-container fade-in">
-      {/* Turkish Section - Left Side */}
-      <div className="info-box info-left">
-        <h3>Nasıl Kullanılır? 🇹🇷</h3>
-        <p>
-          Bu uygulama, yorumlarınızın duygusunu analiz etmek için 
-          <strong> LSTM (Deep Learning)</strong> modelini kullanır.
-        </p>
-        <ul className="info-list">
-          <li>Sadece İngilizce yorumlarda çalışır.</li>
-          <li>Daha uzun ve detaylı yorumlar, modelin daha doğru sonuçlar vermesini sağlar.</li>
-          <li>Skorlar 1 (Çok Olumsuz) ile 5 (Çok Olumlu) arasındadır.</li>
-        </ul>
-      </div>
+    <div className="footer-info-container fade-in">
+      <div className="footer-grid">
+        {/* Left Box: Instructions */}
+        <div className="footer-box">
+          <h3>How to Use 🚀</h3>
+          <p>This application uses an <strong>LSTM (Deep Learning)</strong> model to predict the sentiment score of your comments.</p>
+          <ul className="info-list">
+            <li>Works exclusively with English comments.</li>
+            <li>Longer, detailed comments provide higher accuracy.</li>
+            <li>Results are processed in real-time via the AI backend.</li>
+          </ul>
+        </div>
 
-      {/* English Section - Right Side */}
-      <div className="info-box info-right">
-        <h3>How to Use? 🇺🇸</h3>
-        <p>
-          This app uses an <strong>LSTM (Deep Learning)</strong> model 
-          to predict the sentiment score of your comments.
-        </p>
-        <ul className="info-list">
-          <li>This app only works with English comments.</li>
-          <li>The more information you give and the lengthier they are, the more accurate results you will receive.</li>
-          <li>Scores range from 1 (Very Negative) to 5 (Very Positive).</li>
-        </ul>
+        {/* Middle Box: Score Scale */}
+        <div className="footer-box">
+          <h3>Score Scale 📊</h3>
+          <div className="scale-item red">🔴 1.0 - 2.0: Strongly Negative</div>
+          <div className="scale-item orange">🟠 2.0 - 3.0: Negative/Disappointed</div>
+          <div className="scale-item gray">⚪ 3.0: Neutral/Objective</div>
+          <div className="scale-item light-green">🟢 3.0 - 4.0: Positive/Satisfied</div>
+          <div className="scale-item bright-green">💎 4.0 - 5.0: Extremely Positive</div>
+        </div>
+
+        {/* Right Box: Try These */}
+        <div className="footer-box">
+          <h3>Try These Examples ✨</h3>
+          <div className="example-sentences">
+            <code>"Absolute masterpiece, I loved it!"</code>
+            <code>"A complete waste of my time."</code>
+            <code>"The plot was fine but acting was slow."</code>
+          </div>
+        </div>
       </div>
     </div>
   );
