@@ -50,6 +50,17 @@ def predict_sentiment():
         prediction = model.predict(processed_input)[0][0]
         print(f"3. Modelin Ham Çıktısı (0.0 - 1.0 arası): {prediction}")
 
+        # --- YENİ: MATEMATİKSEL ESNETİCİ (AMPLIFIER) ---
+        # Model 0.5'e (nötr) yakın değerler veriyorsa, bu değerleri uçlara doğru itiyoruz.
+        # prediction_shifted: -0.5 ile +0.5 arası bir değer olur
+        prediction_shifted = prediction - 0.5
+        
+        # Değeri 1.8 kat güçlendiriyoruz (Bu katsayıyı artırarak daha da uçlara itebilirsin)
+        amplified_prediction = prediction_shifted * 1.8 
+        
+        # Değeri tekrar 0 ile 1 arasına çekiyoruz (ve sınırları taşırmasını engelliyoruz)
+        final_probability = max(0.0, min(1.0, amplified_prediction + 0.5))
+
         # 4. SKORU 1 İLE 5 ARASINA ÖLÇEKLEME (React arayüzüne uyum için)
         # 0.0 -> 1 puan, 1.0 -> 5 puan olacak şekilde matematiğe döküyoruz
         score_1_to_5 = 1 + (prediction * 4)
