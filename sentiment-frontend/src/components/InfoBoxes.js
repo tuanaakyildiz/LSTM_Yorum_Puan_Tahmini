@@ -41,9 +41,11 @@ const InfoBoxes = () => {
         <div className="footer-box">
           <h3>Try These / Bunları Deneyin ✨</h3>
           <div className="example-sentences">
-            <code>"Absolute masterpiece, I loved it!"</code>
-            <code>"A complete waste of my time."</code>
-            <code>"The plot was fine but acting was slow."</code>
+            <code>"This place is a total disaster. The staff was incredibly rude and the food was literally inedible. Avoid this place at all costs!"</code>
+            <code>"It was an okay experience. Some parts of the meal were decent, but the atmosphere was a bit too loud for my taste. Nothing special."</code>
+            <code>"We had a really nice time here. The food was good and the waiter was very friendly. A solid spot for a casual dinner."</code>
+            <code>"We had a really nice time at this place. The food was quite good and arrived quickly. Our waiter was very friendly and made sure we had everything we needed. It is a solid spot for a casual dinner and I would definitely come back again."</code>
+            <code>"Absolute masterpiece! I loved every single bite. The best service I have ever received and the atmosphere was perfect. Highly recommend!"</code>
           </div>
         </div>
 
