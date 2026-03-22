@@ -13,25 +13,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
-const handlePredict = async () => {
-    setLoading(true);
-    try {
-      //{ text } yerine { review: text } yazarak backend'in beklediği formata çevrildi
-      const response = await axios.post('https://tuievolution-sentiment-api.hf.space/predict', { 
-        review: text 
-      });
-      
-      setScore(response.data.score); // Not: Backend "raw_score" veya "confidence" dönüyorsa burayı ona göre güncellemelisin
-    } catch (error) {
-      console.error("API Hatası:", error); // Hatayı konsolda detaylı görmek için
-      alert("Sunucuya bağlanılamadı! Lütfen tekrar deneyin.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  //testing in local
-/*   const handlePredict = async () => {
+  // //testing in local
+   const handlePredict = async () => {
     setLoading(true);
     try {
       // 1. URL geçici olarak lokale (kendi bilgisayarına) yönlendirildi
@@ -53,7 +37,7 @@ const handlePredict = async () => {
     } finally {
       setLoading(false);
     }
-  }; */
+  }; 
 
 
   return (
@@ -62,10 +46,6 @@ const handlePredict = async () => {
         <h2>LSTM Sentiment Analysis</h2>
         
        <div className="nav-actions">
-          <a href="https://tuievolution.vercel.app/" className="brand-link">
-          TUIEVOLUTION
-        </a>
-          
           <button onClick={toggleTheme} className="theme-toggle">
             {theme === 'light' ? '🌙 Dark Mod' : '☀️ Light Mod'}
           </button>
